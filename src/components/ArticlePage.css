@@ -1,6 +1,59 @@
-.container {
+.article-title {
+    font-size: 16px;
+    text-align: center;
+}
+
+.article-author {
+    font-size: 14px;
+}
+
+.article-image {
+    max-width: 100%;
+    height: auto;
+}
+.author-text {
+    text-align: right;
+    margin-top: auto; 
+    margin-right: 30px;
+}
+
+.button-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
+    justify-content: flex-end; 
+    align-items: flex-end; 
+    height: 100%; 
+}
+
+.button {
+    margin-left: 10px; 
+    width: 110px;
+}
+
+
+
+@media (min-width: 768px) {
+    .article-title {
+        font-size: 30px;
+    }
+
+    .article-author {
+        font-size: 20px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .article-title {
+        font-size: 32px;
+    }
+
+    .article-author {
+        font-size: 28px;
+    }
+
+    .article-image {
+        max-width: 70%; 
+    }
+   
+    
 }
