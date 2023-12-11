@@ -1,8 +1,13 @@
-# React + Vite
+app.get('/api/topics', getAllTopics);
+app.get('/api', getAllEndpoints);
+app.get('/api/articles/:article_id',getArticleById)
+app.get('/api/articles/:article_id/comments',getCommentsForArticle)
+app.get('/api/articles',getArticles)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+app.get('/api/users',getAllUsers)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+app.post('/api/articles/:article_id/comments', postCommentForArticle)
+app.delete('/api/comments/:comment_id',deleteComment)
+app.patch('/api/articles/:article_id',updateArticle)
