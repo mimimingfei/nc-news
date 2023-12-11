@@ -12,18 +12,13 @@ const NewsList = () => {
     useEffect(() => {
         getArticles().then((data) => setNews(data))
     }, [])
-    const handleClick = async (id) => {
-        const articleData = await getArticleById(id);
-        console.log(articleData)
-        navigate(`/articles/${id}`, { state: { article: articleData } });
-    };
- 
+    
     return (
         <Row className="justify-content-center">
             
             {news.map((article) => (
                 <Col xs={12} md={6} key={article.article_id} className="d-flex justify-content-center">
-                  <div onClick={() => handleClick(article.article_id)}>
+                   <div onClick={() => navigate(`/articles/${article.article_id}`)}>
                     <NewsCard article={article} /></div>
                 </Col>
             ))}
