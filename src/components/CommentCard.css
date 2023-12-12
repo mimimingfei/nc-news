@@ -1,0 +1,28 @@
+.comment-card-container {
+    padding: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    min-width: 400px;
+    background-color: rgb(245, 229, 163);
+}
+
+.comment-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 700px) {
+    .comment-card-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+@media (min-width: 700px) and (max-width: 1200px) {
+    .comment-card-container {
+        margin-left: 120px;
+        margin-right: 120px;
+    }
+}

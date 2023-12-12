@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react"
 import { getArticleById } from '../utils/api';
-import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-
+import { Container, Row, Col} from 'react-bootstrap';
+import CommentList from './CommentList'
 import './ArticlePage.css'
 const ArticlePage = () => {
     const { id } = useParams();
@@ -19,28 +19,28 @@ const ArticlePage = () => {
     if (isLoading) {
         return <h1>Loading...</h1>
     }
-
     return (
-        <Container >
-      <Row >
-        <Col xs={12}>
-            <h1 className="article-title">{articleData.title}</h1>
-            <p className="author-text">By {articleData.author}</p>
-        </Col>
-    </Row>
-    <Row>
-    <Col xs={12} md={8} mdOffset={2} style={{ textAlign: 'center' }}>
-            <img src={articleData.article_img_url} className="article-image"/>
-            <p className='article-body'>{articleData.body}</p>
-        </Col>
-    </Row>
-        <Row className="button-container">  
-            <Button className = 'button' variant="light">Votes: {articleData.votes}</Button>{' '}     
-            <Button className = 'button'variant="light">Comments: {articleData.comment_count}</Button>{' '}
-     
-        </Row>
-    </Container>
-    
+        <>
+            <Container>
+                <Row>
+                    <Col xs={12}>
+                        <h1 className="article-title">{articleData.title}</h1>
+                        <p className="author-text">By {articleData.author}</p>
+                    </Col>
+                </Row>
+                <Row>
+                <Col xs={12} md={8}>
+                        <img src={articleData.article_img_url} className="article-image" />
+                        <p className='article-body'>{articleData.body}</p>
+                    </Col>
+                </Row>
+                <Row className='votes'>
+                    <Col md={4} xs={6}>Votes: {articleData.votes}</Col>
+                    <Col md={4} xs={6}>Comments: {articleData.comment_count}</Col>
+                </Row>
+            </Container>
+            <CommentList />
+        </>
     )
 };
 export default ArticlePage
