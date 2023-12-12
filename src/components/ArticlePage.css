@@ -1,0 +1,80 @@
+.article-title {
+    font-size: 16px;
+    text-align: center;
+}
+
+.article-author {
+    font-size: 14px;
+}
+
+.article-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.author-text {
+    text-align: right;
+    margin-top: auto;
+    margin-right: 30px;
+}
+
+.article-body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: justify;
+    font-size: larger;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.button {
+    margin-left: 10px;
+    width: 110px;
+}
+
+
+
+@media (min-width: 768px) {
+    .article-title {
+        font-size: 30px;
+    }
+
+    .article-author {
+        font-size: 20px;
+    }
+
+    .article-body {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .article-title {
+        font-size: 32px;
+    }
+
+    .article-author {
+        font-size: 28px;
+    }
+
+    .article-image {
+        max-width: 70%;
+    }
+
+    .article-body {
+        margin-left: 180px;
+        margin-right: 180px;
+    }
+
+}

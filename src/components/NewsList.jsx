@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
 import NewsCard from './NewsCard'
-import { getArticles } from '../utils/api'
+
+import {getArticles,getArticleById} from '../utils/api'
+
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
@@ -16,9 +19,12 @@ const NewsList = () => {
             setIsLoading(false);
         })
     }, [])
+
+
     if (isLoading) {
         return <h1>Loading...</h1>
     }
+
 
     return (
         <Row className="justify-content-center">
@@ -26,7 +32,8 @@ const NewsList = () => {
             {news.map((article) => (
                 <Col xs={12} md={6} key={article.article_id} className="d-flex justify-content-center">
 
-                    <NewsCard article={article} />
+                   <div onClick={() => navigate(`/articles/${article.article_id}`)}>
+                    <NewsCard article={article} /></div>
                 </Col>
             ))}
         </Row>
