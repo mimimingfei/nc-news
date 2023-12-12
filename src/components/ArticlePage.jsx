@@ -29,9 +29,9 @@ const ArticlePage = () => {
         </Col>
     </Row>
     <Row>
-    <Col xs={12} md={8} mdOffset={2} style={{ textAlign: 'center', margin:'10px 200px' }}>
+    <Col xs={12} md={8} mdOffset={2} style={{ textAlign: 'center' }}>
             <img src={articleData.article_img_url} className="article-image"/>
-            <p >{articleData.body}</p>
+            <p className='article-body'>{articleData.body}</p>
         </Col>
     </Row>
         <Row className="button-container">  
