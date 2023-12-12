@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react"
 import { getArticleById } from '../utils/api';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-
+import CommentList from './CommentList'
 import './ArticlePage.css'
 const ArticlePage = () => {
     const { id } = useParams();
@@ -21,6 +21,7 @@ const ArticlePage = () => {
     }
 
     return (
+        <>
         <Container >
       <Row >
         <Col xs={12}>
@@ -34,13 +35,14 @@ const ArticlePage = () => {
             <p className='article-body'>{articleData.body}</p>
         </Col>
     </Row>
-        <Row className="button-container">  
+        <Row className="button-container" style={{marginTop:'50px'}}>  
             <Button className = 'button' variant="light">Votes: {articleData.votes}</Button>{' '}     
             <Button className = 'button'variant="light">Comments: {articleData.comment_count}</Button>{' '}
      
         </Row>
     </Container>
-    
+    <CommentList/>
+    </>
     )
 };
 export default ArticlePage
