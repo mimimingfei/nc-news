@@ -16,9 +16,6 @@ const CommentsList = () => {
             setIsLoading(false);
         })
     }, [id])
-    const handleNewComment = (newComment) => {
-        setComments([...comments, newComment]);
-    };
     if (isLoading) {
         return <h1>Loading...</h1>
     }
@@ -26,7 +23,7 @@ const CommentsList = () => {
 
     return (
         <Container className="justify-content-center">
-            <Row><CommentAdder  handleNewComment={handleNewComment}/></Row>
+            <Row><CommentAdder   setComments={ setComments}/></Row>
             <Row style={{ marginTop: '100px' }}>
                 {comments.map((comment) => (
                     <Col key={comment.comment_id}>

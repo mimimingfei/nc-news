@@ -2,56 +2,35 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { postComment } from '../utils/api';
 import { useParams } from 'react-router-dom';
-
-const CommentAdder = ({ handleNewComment }) => {
+import './CommentAdder.css'
+const CommentAdder = ({ setComments }) => {
     const { id } = useParams();
-    const [commentText, setCommentText] = useState('');
+    const [newComment, setNewComment] = useState('')
+    const [err, setErr] = useState(null);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const newComment = {
-            username: "grumpy19",
-            body: commentText
-        };
-
-        postComment(id, newComment)
-            .then(comment => {
-                console.log(comment)
-                handleNewComment(comment);
-                setCommentText('');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        postComment(id, { username: "grumpy19", body: newComment }) 
+            .then((newComment) => {
+                setNewComment('');
+                setComments((currComments) => {
+                    return [newComment, ...currComments];
+                });
+                alert("Comment posted!")
             })
-            .catch(error => {
-                console.error('Error posting comment:', error);
+            .catch(err => {
+                setErr('Something went wrong, please try again.');
             });
     };
 
-    const handleTextChange = (event) => {
-        setCommentText(event.target.value);
-    };
-
     return (
-        <Row style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Col />
-            <Col xs={12} md={8} lg={6}>
-                <Form style={{ marginTop: '50px', display: 'flex' }} onSubmit={handleSubmit}>
-                    <Form.Group controlId="commentInput">
-                        <Form.Control
-                            as="textarea"
-                            style={{ width: '800px', height: '100px' }}
-                            type="text"
-                            placeholder="Write your comment here"
-                            value={commentText}
-                            onChange={handleTextChange}
-                        />
-                    </Form.Group>
-                    <Button style={{ marginTop: '50px' }} variant="primary" type="submit">
-                        Send Comment
-                    </Button>
-                </Form>
-            </Col>
-            <Col />
-        </Row>
+        <div>
+            <form className='form' onSubmit={handleSubmit}>
+                <label className='label' htmlFor='newComment'>Add a comment</label>
+                <textarea className='textarea' id='newComment' value={newComment} onChange={(e) => setNewComment(e.target.value)} required></textarea>
+                <button className='button'>Add</button>
+            </form>
+        </div >
     );
 };
-
 export default CommentAdder;
