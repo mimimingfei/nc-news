@@ -8,8 +8,7 @@ const ArticlePage = () => {
     const { id } = useParams();
     const [articleData, setArticleData] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
-    const [isUpdating, setIsUpdating] = useState(false);
-
+    const [err, setErr] = useState(null);
 
     useEffect(() => {
         getArticleById(id).then((data) => {
@@ -20,28 +19,21 @@ const ArticlePage = () => {
 
 
     const handleVote = () => {
-        setIsUpdating(true);
-        const newVotes = articleData.votes + 1;
-        setArticleData({ ...articleData, votes: newVotes });
-        updateVotesOfArticle(id, 1).then(article => {
-            setArticleData(prevData => ({ ...prevData, votes: article.votes }));
-            setIsUpdating(false);
-        }).catch(err => {
-            alert("Failed to update votes. Please try again.");
-            setIsUpdating(false);
+        setArticleData({ ...articleData, votes: articleData.votes + 1 });
+        setErr(null);
+        updateVotesOfArticle(id, 1).catch((err) => {
+            setArticleData({ ...articleData, votes: articleData.votes - 1 });
+          setErr('Something went wrong, please try again.');
         });
-    };
+      };
+    
 
     const handleDownvote = () => {
-        setIsUpdating(true);
-        const newVotes = articleData.votes - 1;
-        setArticleData({ ...articleData, votes: newVotes });
-        updateVotesOfArticle(id, -1).then(article => {
-            setArticleData(prevData => ({ ...prevData, votes: article.votes }));
-            setIsUpdating(false);
-        }).catch(err => {
-            alert("Failed to update votes. Please try again.");
-            setIsUpdating(false);
+        setArticleData({ ...articleData, votes: articleData.votes - 1 });
+        setErr(null);
+        updateVotesOfArticle(id, 1).catch((err) => {
+            setArticleData({ ...articleData, votes: articleData.votes + 1 });
+          setErr('Something went wrong, please try again.');
         });
     };
 
@@ -70,8 +62,8 @@ const ArticlePage = () => {
                     <Col md={4} xs={6}>Comments: {articleData.comment_count}</Col>
                     <Col md={4} xs={6}>Votes: {articleData.votes}</Col>
                     <Col md={4} xs={6}>
-                        <Button onClick={handleVote} disabled={isUpdating}>Vote</Button>
-                        <Button onClick={handleDownvote} disabled={isUpdating}>Downvote</Button>
+                        <Button onClick={handleVote}>Vote</Button>
+                        <Button onClick={handleDownvote} >Downvote</Button>
 
                     </Col>
                 </Row>
