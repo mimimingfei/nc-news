@@ -26,7 +26,7 @@ const CommentsList = () => {
         <Row className="justify-content-center" style={{marginTop:'100px'}}>
             {comments.map((comment) => (
                 <Col key={comment.comment_id}>
-                    <CommentCard comment={comment} />
+                    <CommentCard comment={comment} setComments={setComments} />
                 </Col>
             ))}
         </Row>
