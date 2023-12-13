@@ -5,28 +5,27 @@ import { useParams } from 'react-router-dom';
 import './CommentAdder.css'
 const CommentAdder = ({ setComments }) => {
     const { id } = useParams();
+    const [username, setUsername] = useState('grumpy19')
     const [newComment, setNewComment] = useState('')
     const [err, setErr] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        postComment(id, { username: "grumpy19", body: newComment }) 
-            .then((newComment) => {
-                setNewComment('');
-                setComments((currComments) => {
-                    return [newComment, ...currComments];
-                });
-                alert("Comment posted!")
-            })
+        const NewComment = { username: username, body: newComment };
+        setComments(currComments => [NewComment, ...currComments]);
+        setNewComment('');
+        postComment(id, NewComment)
             .catch(err => {
-                setErr('Something went wrong, please try again.');
-            });
-    };
+                setComments(currComments => currComments.slice(1));
+                setErr(err.message)
+             } )
+            };
+    
 
     return (
         <div>
             <form className='form' onSubmit={handleSubmit}>
-                <label className='label' htmlFor='newComment'>Add a comment</label>
+                <label className='label' htmlFor='newComment'>Logged in: {username} </label>
                 <textarea className='textarea' id='newComment' value={newComment} onChange={(e) => setNewComment(e.target.value)} required></textarea>
                 <button className='button'>Add</button>
             </form>
