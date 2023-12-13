@@ -12,6 +12,7 @@ const CommentAdder = ({ setComments }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
+        
         try {
             const response = await postComment(id, { username: "grumpy19", body: newComment });
             setComments(currComments => [response, ...currComments]);
@@ -21,7 +22,9 @@ const CommentAdder = ({ setComments }) => {
         }
         setIsSubmitting(false);
     };
-
+    if (isSubmitting) {
+        return <h1>Submitting your comment...</h1>
+    }
     return (
         <div>
             <form className='form' onSubmit={handleSubmit}>
