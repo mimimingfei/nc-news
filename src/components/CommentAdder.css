@@ -1,0 +1,58 @@
+.form {
+    padding: 30px;
+    background-color: rgb(245, 229, 163);
+    margin: 50px 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.label, .button {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    margin-bottom: 10px;
+}
+
+.textarea {
+    width: 100%; 
+    min-height: 70px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.button {
+    min-width: 100px;
+    background-color: aliceblue;
+    border: 1px solid #ddd;
+    color: rgb(129, 91, 11); 
+    font-size: larger;
+    cursor: pointer;
+    padding: 10px 20px; 
+}
+
+
+@media (max-width: 700px) {
+    .form {
+        margin: 70px;
+    }
+    .textarea {
+        min-height: 50px;
+        padding: 10px;
+    }
+}
+
+@media (min-width: 701px) and (max-width: 1200px) {
+    .form {
+        margin: 30px 70px;
+    }
+    .textarea {
+        min-height: 60px;
+        padding: 15px;
+    }
+}
