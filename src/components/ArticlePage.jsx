@@ -8,7 +8,8 @@ const ArticlePage = () => {
     const { id } = useParams();
     const [articleData, setArticleData] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
-  
+    const [isUpdating, setIsUpdating] = useState(false);
+
 
     useEffect(() => {
         getArticleById(id).then((data) => {
@@ -17,30 +18,35 @@ const ArticlePage = () => {
         })
     }, [id])
 
-   
+
     const handleVote = () => {
+        setIsUpdating(true);
         const newVotes = articleData.votes + 1;
         setArticleData({ ...articleData, votes: newVotes });
         updateVotesOfArticle(id, 1).then(article => {
-            setArticleData(article);
+            setArticleData(prevData => ({ ...prevData, votes: article.votes }));
+            setIsUpdating(false);
         }).catch(err => {
-            console.log(err)
             alert("Failed to update votes. Please try again.");
+            setIsUpdating(false);
         });
     };
-    
-   
+
     const handleDownvote = () => {
+        setIsUpdating(true);
         const newVotes = articleData.votes - 1;
         setArticleData({ ...articleData, votes: newVotes });
         updateVotesOfArticle(id, -1).then(article => {
-            setArticleData(article);
+            setArticleData(prevData => ({ ...prevData, votes: article.votes }));
+            setIsUpdating(false);
         }).catch(err => {
-            console.log(err)
             alert("Failed to update votes. Please try again.");
+            setIsUpdating(false);
         });
     };
-    
+
+
+
     if (isLoading) {
         return <h1>Loading...</h1>
     }
@@ -64,8 +70,9 @@ const ArticlePage = () => {
                     <Col md={4} xs={6}>Comments: {articleData.comment_count}</Col>
                     <Col md={4} xs={6}>Votes: {articleData.votes}</Col>
                     <Col md={4} xs={6}>
-                        <Button onClick={handleVote}>Vote</Button>
-                        <Button onClick={handleDownvote}>Downvote</Button>
+                        <Button onClick={handleVote} disabled={isUpdating}>Vote</Button>
+                        <Button onClick={handleDownvote} disabled={isUpdating}>Downvote</Button>
+
                     </Col>
                 </Row>
             </Container>
