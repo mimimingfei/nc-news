@@ -27,10 +27,20 @@ export const getComments = (id)=>{
     })
 }
 
+
+export const postComment = (id, comment) => {
+    return newsApi
+        .post(`/api/articles/${id}/comments`, comment)
+        .then(({ data }) => {
+            return data.Comment;
+        });
+};
+
 export const updateVotesOfArticle = (id, newVote) => {
     return newsApi
-    .patch(`/api/articles/${id}`, { inc_votes:  newVote })
+    .patch(`/api/articles/${id}`, { inc_votes: newVote })
         .then(({ data }) => {
             return data.updatedArticle;
         });
 };
+
