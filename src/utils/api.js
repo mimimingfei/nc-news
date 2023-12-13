@@ -26,3 +26,11 @@ export const getComments = (id)=>{
         return data.comments
     })
 }
+
+export const updateVotesOfArticle = (id, newVote) => {
+    return newsApi
+    .patch(`/api/articles/${id}`, { inc_votes:  newVote })
+        .then(({ data }) => {
+            return data.updatedArticle;
+        });
+};
