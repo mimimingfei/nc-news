@@ -7,15 +7,10 @@ const CommentCard = ({ comment, setComments }) => {
     const [err, setErr] = useState(null);
 
     const handleDelete = () => {
-        
+        setComments(currentComments => currentComments.filter(c => c.comment_id !== comment.comment_id))
         deleteComment(comment.comment_id)
-            .then(() => {
-                setComments(currentComments => currentComments.filter(c => c.comment_id !== comment.comment_id))
-                alert("Comment deleted!");
-                setErr(null);
-            })
             .catch(err => {
-                setErr('Something went wrong, please try again.');
+                setErr(err.message)
             });
     };
 
