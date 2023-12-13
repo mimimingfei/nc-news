@@ -38,8 +38,8 @@ const ArticlePage = () => {
                     <Col md={4} xs={6}>Votes: {articleData.votes}</Col>
                     <Col md={4} xs={6}>Comments: {articleData.comment_count}</Col>
                 </Row>
+                <CommentList />   
             </Container>
-            <CommentList />
         </>
     )
 };

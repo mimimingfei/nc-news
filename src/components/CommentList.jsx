@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import CommentCard from "./CommentCard"
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
-
+import CommentAdder from './CommentAdder';
 
 const CommentsList = () => {
     const { id } = useParams();
@@ -16,21 +16,25 @@ const CommentsList = () => {
             setIsLoading(false);
         })
     }, [id])
-
+    const handleNewComment = (newComment) => {
+        setComments([...comments, newComment]);
+    };
     if (isLoading) {
         return <h1>Loading...</h1>
     }
 
 
     return (
-        <Row className="justify-content-center" style={{marginTop:'100px'}}>
-            {comments.map((comment) => (
-                <Col key={comment.comment_id}>
-                    <CommentCard comment={comment} />
-                </Col>
-            ))}
-        </Row>
-
+        <Container className="justify-content-center">
+            <Row><CommentAdder  handleNewComment={handleNewComment}/></Row>
+            <Row style={{ marginTop: '100px' }}>
+                {comments.map((comment) => (
+                    <Col key={comment.comment_id}>
+                        <CommentCard comment={comment} />
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     )
 }
 export default CommentsList
