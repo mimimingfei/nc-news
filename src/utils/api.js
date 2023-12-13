@@ -38,7 +38,7 @@ export const postComment = (id, comment) => {
 
 export const updateVotesOfArticle = (id, newVote) => {
     return newsApi
-    .patch(`/api/articles/${id}`, { inc_votes:  newVote })
+    .patch(`/api/articles/${id}`, { inc_votes: newVote })
         .then(({ data }) => {
             return data.updatedArticle;
         });

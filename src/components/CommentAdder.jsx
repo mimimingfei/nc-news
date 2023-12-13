@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import { Row, Col, Form, Button } from 'react-bootstrap';
+import { useState, useContext } from 'react';
 import { postComment } from '../utils/api';
 import { useParams } from 'react-router-dom';
 import './CommentAdder.css'
+
 const CommentAdder = ({ setComments }) => {
     const { id } = useParams();
-    const [username, setUsername] = useState('grumpy19')
     const [newComment, setNewComment] = useState('')
     const [err, setErr] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false); 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const NewComment = { username: username, body: newComment };
-        setComments(currComments => [NewComment, ...currComments]);
-        setNewComment('');
-        postComment(id, NewComment)
-            .catch(err => {
-                setComments(currComments => currComments.slice(1));
-                setErr(err.message)
-             } )
-            };
-    
+        setIsSubmitting(true);
+        try {
+            const response = await postComment(id, { username: "grumpy19", body: newComment });
+            setComments(currComments => [response, ...currComments]);
+            setNewComment('');
+        } catch (error) {
+            setErr(error.message);
+        }
+        setIsSubmitting(false);
+    };
 
     return (
         <div>
             <form className='form' onSubmit={handleSubmit}>
-                <label className='label' htmlFor='newComment'>Logged in: {username} </label>
+                <label className='label' htmlFor='newComment'> Add a comment </label>
                 <textarea className='textarea' id='newComment' value={newComment} onChange={(e) => setNewComment(e.target.value)} required></textarea>
-                <button className='button'>Add</button>
+                <button className='button' disabled={isSubmitting}>Add</button> 
             </form>
+            {err && <div className='error'>{err}</div>}
         </div >
     );
 };

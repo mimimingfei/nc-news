@@ -21,12 +21,8 @@ const ArticlePage = () => {
 
     const handleVote = () => {
         setIsUpdating(true);
-        const newVotes = articleData.votes + 1;
-        setArticleData({ ...articleData, votes: newVotes });
-        updateVotesOfArticle(id, 1).then(article => {
-            setArticleData(prevData => ({ ...prevData, votes: article.votes }));
-            setIsUpdating(false);
-        }).catch(err => {
+        setArticleData({ ...articleData, votes: articleData.votes + 1 });
+        updateVotesOfArticle(id, 1).catch(err => {
             alert("Failed to update votes. Please try again.");
             setIsUpdating(false);
         });
@@ -34,12 +30,8 @@ const ArticlePage = () => {
 
     const handleDownvote = () => {
         setIsUpdating(true);
-        const newVotes = articleData.votes - 1;
-        setArticleData({ ...articleData, votes: newVotes });
-        updateVotesOfArticle(id, -1).then(article => {
-            setArticleData(prevData => ({ ...prevData, votes: article.votes }));
-            setIsUpdating(false);
-        }).catch(err => {
+        setArticleData({ ...articleData, votes: articleData.votes - 1 });
+        updateVotesOfArticle(id, -1).catch(err => {
             alert("Failed to update votes. Please try again.");
             setIsUpdating(false);
         });
@@ -77,8 +69,6 @@ const ArticlePage = () => {
                 </Row>
     
             </Container>
-
-=======
 
             <CommentList />
 
