@@ -44,3 +44,18 @@ export const updateVotesOfArticle = (id, newVote) => {
         });
 };
 
+export const getArticlesByTopic = (topic) => {
+    return newsApi
+    .get(`/api/articles?topic=${topic}`)
+        .then(({ data }) => {
+            return data.articles;
+        });
+};
+
+export const getTopics = ()=>{
+    return newsApi
+    .get('/api/topics')
+    .then(({data})=>{
+        return data
+    })
+}
