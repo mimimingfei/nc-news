@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import NewsCard from './NewsCard'
 import { Link } from 'react-router-dom'
-import { getArticles, getArticleById } from '../utils/api'
+import { getArticles } from '../utils/api'
 
 
 import Row from 'react-bootstrap/Row';
