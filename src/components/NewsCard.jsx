@@ -20,6 +20,10 @@ const NewsCard = ({ article }) => {
                 <Card.Title className="news-card-title">{article.title}</Card.Title>
                 <Card.Subtitle className="news-card-subtitle">By {article.author}</Card.Subtitle>
                 <p>{formatDate(article.created_at)}</p>
+                <div className='commentsVotesSection'>
+                <p>Comments: {article.comment_count}</p>
+                <p>Votes: {article.votes}</p>
+                </div>
             </Card.Body>
         </Card>
     );
