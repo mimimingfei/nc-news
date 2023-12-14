@@ -4,11 +4,13 @@ import { getArticleById, updateVotesOfArticle } from '../utils/api';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CommentList from './CommentList'
 import './ArticlePage.css'
+import Error from './Error'
 const ArticlePage = () => {
     const { id } = useParams();
     const [articleData, setArticleData] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
-    const [err, setErr] = useState(null);
+    const [isUpdating, setIsUpdating] = useState(true)
+    const [err, setErr] = useState();
 
     useEffect(() => {
         getArticleById(id).then((data) => {
@@ -42,7 +44,9 @@ const ArticlePage = () => {
     if (isLoading) {
         return <h1>Loading...</h1>
     }
-
+    if (err){
+        return <Error message = {err}/>
+    }
     return (
         <>
             <Container>
