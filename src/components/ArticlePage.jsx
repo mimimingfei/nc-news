@@ -7,6 +7,7 @@ import './ArticlePage.css'
 const ArticlePage = () => {
     const { id } = useParams();
     const [articleData, setArticleData] = useState(null);
+    const [isUpdating, setIsUpdating] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const [err, setErr] = useState(null);
 
@@ -36,7 +37,6 @@ const ArticlePage = () => {
             setIsUpdating(false);
         });
     };
-
 
 
     if (isLoading) {

@@ -15,32 +15,31 @@ const NewsList = () => {
     const fetchArticles = async () => {
         setIsLoading(true);
         setErr(null);
-
         try {
             const data = await getArticles(searchParams);
             setNews(data);
         } catch (err) {
-            setErr("error from getArticles" + err.message);
+            setErr("error from getArticles " + err.message);
         } finally {
             setIsLoading(false);
         }
     };
-
 
     const fetchTopics = async () => {
         try {
             const topicsData = await getTopics();
             setTopics(topicsData);
         } catch (err) {
-            setErr("error from getTopics" + err.message)
+            setErr("error from getTopics " + err.message)
         }
     };
     useEffect(() => {
         fetchArticles();
-        fetchTopics();
     }, [searchParams]);
 
-
+    useEffect(()=>{
+        fetchTopics();
+    },[topics])
     const handleSortChange = (e) => {
         const value = e.target.value;
         setSearchParams({ sort_by: value, order: searchParams.get('order') || 'desc' });
