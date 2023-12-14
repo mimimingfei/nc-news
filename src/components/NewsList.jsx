@@ -15,15 +15,12 @@ const NewsList = () => {
     const fetchArticles = async () => {
         setIsLoading(true);
         setErr(null);
-        const topic = searchParams.get('topic') || '';
-        const sort_by = searchParams.get('sort_by') || 'date';
-        const order = searchParams.get('order') || 'desc';
 
         try {
-            const data = await getArticles({ topic, sort_by, order });
+            const data = await getArticles(searchParams);
             setNews(data);
         } catch (err) {
-            setErr(err.message);
+            setErr("error from getArticles" + err.message);
         } finally {
             setIsLoading(false);
         }
@@ -35,7 +32,7 @@ const NewsList = () => {
             const topicsData = await getTopics();
             setTopics(topicsData);
         } catch (err) {
-            setErr(err.message)
+            setErr("error from getTopics" + err.message)
         }
     };
     useEffect(() => {
@@ -71,6 +68,7 @@ const NewsList = () => {
         <>  
          <Row  style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', margin:'30px 300px'}}>
         <Col>
+        Select topic:
             <Form.Select aria-label="Topic" onChange={handleTopicChange} value={searchParams.get('topic') || ''} style={{ width:'120px',margin: '10px' }}>
                 <option value="">All</option>
                 {topics.map(topic => (
@@ -80,6 +78,7 @@ const NewsList = () => {
         </Col>
 
         <Col>
+        Sort by:
             <Form.Select aria-label="Sort by" onChange={handleSortChange} value={searchParams.get('sort_by') || 'date'} style={{ width:'120px',margin: '10px' }}>
                 <option value="date">Date</option>
                 <option value="comment_count">Comment Count</option>
@@ -88,6 +87,7 @@ const NewsList = () => {
         </Col>
 
         <Col>
+        Order:
             <Form.Select aria-label="Order" onChange={handleOrderChange} value={searchParams.get('order') || 'desc'} style={{ width:'120px',margin: '10px' }}>
                 <option value="desc">Descending</option>
                 <option value="asc">Ascending</option>
