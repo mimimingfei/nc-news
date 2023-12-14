@@ -3,10 +3,11 @@ import './CommentCard.css';
 import { deleteComment } from '../utils/api'
 import { useState, useContext } from 'react';
 import { UserContext } from './UserContext';
+import Error from './Error'
 
 
 const CommentCard = ({ comment, setComments }) => {
-    const [err, setErr] = useState(null);
+    const [err, setErr] = useState();
     const [isDeleting, setIsDeleting] = useState(false)
 
   const user = useContext(UserContext); 
@@ -23,16 +24,15 @@ const CommentCard = ({ comment, setComments }) => {
         });
 };
 
-
-
 const isRightUser = ()=>{
     return user.username ===comment.author
 }
-
+if (err){
+    return <Error message = {err}/>
+}
 
     return (
         <Container className="comment-card-container">
-         
             <Row>
                 <Col xs={12} md={8} lg={6}>
                     <div className="comment-card">
@@ -41,11 +41,10 @@ const isRightUser = ()=>{
                         <p>votes: {comment.votes}</p>
                         {isRightUser() && (
                 <button onClick={handleDelete} disabled={isDeleting}>Delete</button>
-
             )}
                     </div>
                 </Col>
-            </Row>
+            </Row>     
         </Container>
     )
 }
