@@ -27,11 +27,12 @@ const CommentsList = () => {
             <Row style={{ marginTop: '100px' }}>
                 {comments.map((comment) => (
                     <Col key={comment.comment_id}>
-                        <CommentCard comment={comment} />
+                         <CommentCard comment={comment} setComments={setComments} />
                     </Col>
                 ))}
             </Row>
         </Container>
+
     )
 }
 export default CommentsList
