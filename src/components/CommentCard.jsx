@@ -10,6 +10,7 @@ const CommentCard = ({ comment, setComments }) => {
     const [isDeleting, setIsDeleting] = useState(false)
 
   const user = useContext(UserContext); 
+  
   const handleDelete = () => {
     setIsDeleting(true);
     setComments(currentComments => currentComments.filter(c => c.comment_id !== comment.comment_id))
