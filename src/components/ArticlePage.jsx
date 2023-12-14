@@ -19,21 +19,21 @@ const ArticlePage = () => {
 
 
     const handleVote = () => {
+        setIsUpdating(true);
         setArticleData({ ...articleData, votes: articleData.votes + 1 });
-        setErr(null);
-        updateVotesOfArticle(id, 1).catch((err) => {
-            setArticleData({ ...articleData, votes: articleData.votes - 1 });
-          setErr('Something went wrong, please try again.');
+        updateVotesOfArticle(id, 1).catch(err => {
+            setErr(err.message);
+            setIsUpdating(false);
         });
       };
     
 
     const handleDownvote = () => {
+        setIsUpdating(true);
         setArticleData({ ...articleData, votes: articleData.votes - 1 });
-        setErr(null);
-        updateVotesOfArticle(id, 1).catch((err) => {
-            setArticleData({ ...articleData, votes: articleData.votes + 1 });
-          setErr('Something went wrong, please try again.');
+        updateVotesOfArticle(id, -1).catch(err => {
+            setErr(err.message);
+            setIsUpdating(false);
         });
     };
 
@@ -67,9 +67,11 @@ const ArticlePage = () => {
 
                     </Col>
                 </Row>
+    
             </Container>
 
             <CommentList />
+
         </>
     )
 };
