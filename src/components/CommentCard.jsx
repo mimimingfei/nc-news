@@ -32,6 +32,7 @@ const isRightUser = ()=>{
 
     return (
         <Container className="comment-card-container">
+         
             <Row>
                 <Col xs={12} md={8} lg={6}>
                     <div className="comment-card">
