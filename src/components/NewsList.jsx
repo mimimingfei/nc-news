@@ -20,7 +20,7 @@ const NewsList = () => {
             const data = await getArticles(searchParams);
             setNews(data);
         } catch (err) {
-            setErr("error from getArticles " + err.message);
+            setErr(err.message);
         } finally {
             setIsLoading(false);
         }
@@ -30,7 +30,7 @@ const NewsList = () => {
             const topicsData = await getTopics();
             setTopics(topicsData);
         } catch (err) {
-            setErr("error from getTopics " + err.message)
+            setErr("topic does not exist " + err.message)
         }
     };
     useEffect(() => {

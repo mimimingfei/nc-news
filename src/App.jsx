@@ -4,8 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Error from './components/Error'
 
-
-
 function App() {
   return (
       <BrowserRouter>
@@ -15,7 +13,7 @@ function App() {
           <Route path='/' element={<NewsList />} />
           <Route path='/articles' element={<NewsList />} />
           <Route path='articles/:id'element ={<ArticlePage/>}/>
-          <Route path="*" element={<Error/>} />
+          <Route path="*" element={<Error message="path not found" />} />
 
         </Routes>
       </BrowserRouter>

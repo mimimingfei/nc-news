@@ -1,13 +1,19 @@
-app.get('/api/topics', getAllTopics);
-app.get('/api', getAllEndpoints);
-app.get('/api/articles/:article_id',getArticleById)
-app.get('/api/articles/:article_id/comments',getCommentsForArticle)
-app.get('/api/articles',getArticles)
-
-app.get('/api/users',getAllUsers)
+# News app
+Here you can browse news by topic, sort news by date/comments/votes.
+you can vote/unvote for articles.
+you can see other users' comments.
+you can post/delete comments under articles.
 
 
+deployed version: https://creative-florentine-cca1f2.netlify.app
+link to back end repo: https://github.com/mimimingfei/Portofolio-Project
 
-app.post('/api/articles/:article_id/comments', postCommentForArticle)
-app.delete('/api/comments/:comment_id',deleteComment)
-app.patch('/api/articles/:article_id',updateArticle)
+#### minimum version of Node: v20.8.0
+
+## Install Packages
+#### Clone this project to your local, then run following commands in your terminal  
+1. Run `git clone https://github.com/mimimingfei/nc-news`
+2. Install react-bootstrap - `npm install react-bootstrap`
+3. install react-router-dom - `npm install react-router-dom`
+
+## Run server -`npm run dev`

@@ -17,7 +17,9 @@ const ArticlePage = () => {
         getArticleById(id).then((data) => {
             setArticleData(data)
             setIsLoading(false);
-        })
+        }).catch((err)=>{
+            setErr('article does not exist '+err.message)
+            setIsLoading(false)})
     }, [id])
 
 

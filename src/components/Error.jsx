@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
-const Error = ({ message }) => {
+
+const Error = ({message}) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -9,6 +10,7 @@ const Error = ({ message }) => {
     }
   }, [message]);
 
+ 
   if (!visible) {
     return null;
   }
