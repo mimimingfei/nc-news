@@ -8,7 +8,6 @@ import Error from './Error'
 const ArticlePage = () => {
     const { id } = useParams();
     const [articleData, setArticleData] = useState(null);
-    const [isUpdating, setIsUpdating] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const [isUpdating, setIsUpdating] = useState(true)
     const [err, setErr] = useState();

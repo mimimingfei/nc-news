@@ -25,7 +25,6 @@ const NewsList = () => {
             setIsLoading(false);
         }
     };
-
     const fetchTopics = async () => {
         try {
             const topicsData = await getTopics();
@@ -34,10 +33,14 @@ const NewsList = () => {
             setErr("error from getTopics " + err.message)
         }
     };
+    useEffect(() => {
+        fetchArticles();
+    }, [searchParams]);
 
     useEffect(()=>{
         fetchTopics();
     },[topics])
+
     const handleSortChange = (e) => {
         const value = e.target.value;
         setSearchParams({ sort_by: value, order: searchParams.get('order') || 'desc' });
@@ -90,7 +93,6 @@ const NewsList = () => {
                     <option value="asc">Ascending</option>
                 </Form.Select>
             </Col>
-<Col><button onClick={()=>{fetchArticles()}}>Search</button></Col>
             
         </Row>
 

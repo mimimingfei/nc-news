@@ -15,7 +15,7 @@ function App() {
           <Route path='/' element={<NewsList />} />
           <Route path='/articles' element={<NewsList />} />
           <Route path='articles/:id'element ={<ArticlePage/>}/>
-          <Route path="*" element={Error} />
+          <Route path="*" element={<Error/>} />
 
         </Routes>
       </BrowserRouter>
