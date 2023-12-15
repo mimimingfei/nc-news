@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const newsApi = axios.create({
-    baseURL: 'https://news-ynk8.onrender.com',
+    baseURL: 'https://news00.onrender.com',
 })
 
 export const getArticles = (searchParams) => {

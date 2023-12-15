@@ -34,9 +34,6 @@ const NewsList = () => {
             setErr("error from getTopics " + err.message)
         }
     };
-    useEffect(() => {
-        fetchArticles();
-    }, [searchParams]);
 
     useEffect(()=>{
         fetchTopics();
@@ -93,6 +90,8 @@ const NewsList = () => {
                     <option value="asc">Ascending</option>
                 </Form.Select>
             </Col>
+<Col><button onClick={()=>{fetchArticles()}}>Search</button></Col>
+            
         </Row>
 
             <Row className="justify-content-center">

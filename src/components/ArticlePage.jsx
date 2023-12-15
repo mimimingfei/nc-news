@@ -10,7 +10,6 @@ const ArticlePage = () => {
     const [isUpdating, setIsUpdating] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const [err, setErr] = useState(null);
-    const [commentsUpdated, setCommentsUpdated] = useState(false);
 
 
     useEffect(() => {
