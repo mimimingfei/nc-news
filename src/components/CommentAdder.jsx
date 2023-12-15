@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { postComment } from '../utils/api';
 import { useParams } from 'react-router-dom';
 import './CommentAdder.css'
-
+import Error from './Error'
 const CommentAdder = ({ setComments }) => {
     const { id } = useParams();
     const [newComment, setNewComment] = useState('')
@@ -25,6 +25,10 @@ const CommentAdder = ({ setComments }) => {
     if (isSubmitting) {
         return <h1>Submitting your comment...</h1>
     }
+
+    if (err){
+        return <Error message = {err}/>
+    }
     return (
         <div>
             <form className='form' onSubmit={handleSubmit}>
@@ -32,7 +36,7 @@ const CommentAdder = ({ setComments }) => {
                 <textarea className='textarea' id='newComment' value={newComment} onChange={(e) => setNewComment(e.target.value)} required></textarea>
                 <button className='button' disabled={isSubmitting}>Add</button> 
             </form>
-            {err && <div className='error'>{err}</div>}
+          
         </div >
     );
 };
