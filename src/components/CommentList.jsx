@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 import CommentAdder from './CommentAdder';
 
-const CommentsList = () => {
+const CommentsList = ({ onNewComment }) => {
     const { id } = useParams();
     const [comments, setComments] = useState()
     const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +16,14 @@ const CommentsList = () => {
             setIsLoading(false);
         })
     }, [id])
+
+    useEffect(() => {
+        if (comments && onNewComment) {
+            onNewComment();
+        }
+    }, [comments, onNewComment]);
+    
+
     if (isLoading) {
         return <h1>Loading...</h1>
     }

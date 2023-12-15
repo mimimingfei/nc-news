@@ -1,0 +1,22 @@
+.custom-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 30px 300px;
+}
+
+.select-box {
+    width: 120px;
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .custom-row {
+        flex-direction: column;
+        margin: 30px 20px;
+    }
+
+    .select-box {
+        width: 100%;
+    }
+}

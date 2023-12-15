@@ -5,6 +5,7 @@ import { getArticles, getTopics } from '../utils/api'
 import { useSearchParams } from 'react-router-dom';
 import { Row, Col, Form } from 'react-bootstrap';
 import Error from './Error'
+import './NewsList.css'
 const NewsList = () => {
     const [news, setNews] = useState([])
     const [isLoading, setIsLoading] = useState(true);
@@ -15,35 +16,28 @@ const NewsList = () => {
     const fetchArticles = async () => {
         setIsLoading(true);
         setErr(null);
-        const topic = searchParams.get('topic') || '';
-        const sort_by = searchParams.get('sort_by') || 'date';
-        const order = searchParams.get('order') || 'desc';
-
         try {
-            const data = await getArticles({ topic, sort_by, order });
+            const data = await getArticles(searchParams);
             setNews(data);
         } catch (err) {
-            setErr(err.message);
+            setErr("error from getArticles " + err.message);
         } finally {
             setIsLoading(false);
         }
     };
-
 
     const fetchTopics = async () => {
         try {
             const topicsData = await getTopics();
             setTopics(topicsData);
         } catch (err) {
-            setErr(err.message)
+            setErr("error from getTopics " + err.message)
         }
     };
-    useEffect(() => {
-        fetchArticles();
+
+    useEffect(()=>{
         fetchTopics();
-    }, [searchParams]);
-
-
+    },[topics])
     const handleSortChange = (e) => {
         const value = e.target.value;
         setSearchParams({ sort_by: value, order: searchParams.get('order') || 'desc' });
@@ -69,31 +63,36 @@ const NewsList = () => {
 
     return (
         <>  
-         <Row  style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', margin:'30px 300px'}}>
-        <Col>
-            <Form.Select aria-label="Topic" onChange={handleTopicChange} value={searchParams.get('topic') || ''} style={{ width:'120px',margin: '10px' }}>
-                <option value="">All</option>
-                {topics.map(topic => (
-                    <option key={topic.slug} value={topic.slug}>{topic.slug}</option>
-                ))}
-            </Form.Select>
-        </Col>
+          <Row className="custom-row">
+            <Col>
+                <label>Select topic:</label>
+                <Form.Select aria-label="Topic" onChange={handleTopicChange} value={searchParams.get('topic') || ''} className="select-box">
+                    <option value="">All</option>
+                    {topics.map(topic => (
+                        <option key={topic.slug} value={topic.slug}>{topic.slug}</option>
+                    ))}
+                </Form.Select>
+            </Col>
 
-        <Col>
-            <Form.Select aria-label="Sort by" onChange={handleSortChange} value={searchParams.get('sort_by') || 'date'} style={{ width:'120px',margin: '10px' }}>
-                <option value="date">Date</option>
-                <option value="comment_count">Comment Count</option>
-                <option value="votes">Votes</option>
-            </Form.Select>
-        </Col>
+            <Col>
+                <label>Sort by:</label>
+                <Form.Select aria-label="Sort by" onChange={handleSortChange} value={searchParams.get('sort_by') || 'date'} className="select-box">
+                    <option value="date">Date</option>
+                    <option value="comment_count">Comment Count</option>
+                    <option value="votes">Votes</option>
+                </Form.Select>
+            </Col>
 
-        <Col>
-            <Form.Select aria-label="Order" onChange={handleOrderChange} value={searchParams.get('order') || 'desc'} style={{ width:'120px',margin: '10px' }}>
-                <option value="desc">Descending</option>
-                <option value="asc">Ascending</option>
-            </Form.Select>
-        </Col>
-    </Row>
+            <Col>
+                <label>Order:</label>
+                <Form.Select aria-label="Order" onChange={handleOrderChange} value={searchParams.get('order') || 'desc'} className="select-box">
+                    <option value="desc">Descending</option>
+                    <option value="asc">Ascending</option>
+                </Form.Select>
+            </Col>
+<Col><button onClick={()=>{fetchArticles()}}>Search</button></Col>
+            
+        </Row>
 
             <Row className="justify-content-center">
                 {news.map((article) => (

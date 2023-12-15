@@ -7,8 +7,10 @@ import './ArticlePage.css'
 const ArticlePage = () => {
     const { id } = useParams();
     const [articleData, setArticleData] = useState(null);
+    const [isUpdating, setIsUpdating] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const [err, setErr] = useState(null);
+
 
     useEffect(() => {
         getArticleById(id).then((data) => {
@@ -36,8 +38,11 @@ const ArticlePage = () => {
             setIsUpdating(false);
         });
     };
-
-
+    const updateCommentCount = () => {
+        getArticleById(id).then((data) => {
+            setArticleData(data);
+        });
+    };
 
     if (isLoading) {
         return <h1>Loading...</h1>
@@ -69,8 +74,7 @@ const ArticlePage = () => {
                 </Row>
     
             </Container>
-
-            <CommentList />
+            <CommentList onNewComment={updateCommentCount} />
 
         </>
     )
