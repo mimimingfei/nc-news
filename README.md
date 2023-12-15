@@ -5,7 +5,7 @@ you can see other users' comments.
 you can post/delete comments under articles.
 
 
-deployed version: https://creative-florentine-cca1f2.netlify.app
+deployed version: newsuk.netlify.app
 link to back end repo: https://github.com/mimimingfei/Portofolio-Project
 
 #### minimum version of Node: v20.8.0
